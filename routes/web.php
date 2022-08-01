@@ -7,7 +7,9 @@ use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\SocialurlController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ColorSettingController;
+use App\Http\Controllers\ExportImportController;
 use App\Http\Controllers\ThemeSettingController;
+use App\Http\Controllers\PaypalPaymentController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\GeneralSettingController;
 
@@ -70,3 +72,12 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
 
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+
+
+    Route::get('file-import-export', [ExportImportController::class, 'fileImportExport']);
+    Route::post('file-import', [ExportImportController::class, 'fileImport'])->name('file-import');
+    Route::get('file-export', [ExportImportController::class, 'fileExport'])->name('file-export');
+
+    Route::get('payment', [PaypalPaymentController::class, 'payment'])->name('payment');
+    Route::get('cancel', [PaypalPaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('payment/success', [PaypalPaymentController::class, 'success'])->name('payment.success');
