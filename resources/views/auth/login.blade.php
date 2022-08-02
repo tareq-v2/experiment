@@ -185,6 +185,20 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-block" tabindex="4">{{ __('Log in') }}</button>
+
+                                    <div class="flex items-center justify-end mt-4">
+                                        {{-- <a
+                                            scope="public_profile,email"
+                                            onlogin="checkLoginState();"
+                                         class="btn" href="{{ url('auth/facebook') }}"
+                                            style="background: #3B5499; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                                            Login with Facebook
+                                        </a> --}}
+
+                                        <a href="{{ url('auth/google') }}" style="margin-top: 20px;" class="btn btn-lg btn-success btn-block">
+                                            <strong>Login With Google</strong>
+                                          </a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -215,7 +229,7 @@
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/pages/page-auth-login.js') }}"></script>
     <!-- END: Page JS-->
 
-    <script>
+    {{-- <script>
         $(window).on('load', function() {
             if (feather) {
                 feather.replace({
@@ -225,6 +239,33 @@
             }
         })
     </script>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{598575891651975}',
+            cookie     : true,
+            xfbml      : true,
+            version    : '{14.0}'
+          });
+
+          FB.AppEvents.logPageView();
+
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
+         function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+            }
+    </script> --}}
 
 </body>
 <!-- END: Body-->

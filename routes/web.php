@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\SocialurlController;
@@ -81,3 +82,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
     Route::get('payment', [PaypalPaymentController::class, 'payment'])->name('payment');
     Route::get('cancel', [PaypalPaymentController::class, 'cancel'])->name('payment.cancel');
     Route::get('payment/success', [PaypalPaymentController::class, 'success'])->name('payment.success');
+
+
+    // Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
+    // Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+
+    Route::get('auth/google', [SocialController::class,'redirectToGoogle']);
+    Route::get('auth/google/callback', [SocialController::class,'handleGoogleCallback']);
+
