@@ -13,6 +13,7 @@ use App\Http\Controllers\ThemeSettingController;
 use App\Http\Controllers\PaypalPaymentController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\GeneralSettingController;
+use App\Http\Controllers\NexmoApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,4 +90,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
 
     Route::get('auth/google', [SocialController::class,'redirectToGoogle']);
     Route::get('auth/google/callback', [SocialController::class,'handleGoogleCallback']);
+
+    Route::get('/sendMessage', [NexmoApiController::class, 'index']);
 
