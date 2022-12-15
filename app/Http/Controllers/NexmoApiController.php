@@ -9,11 +9,6 @@ use Vonage\Client\Credentials\Basic;
 
 class NexmoApiController extends Controller
 {
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function index()
     {
         {

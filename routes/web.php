@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\AjaxImage;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserApiController;
+use App\Http\Controllers\NexmoApiController;
 use App\Http\Controllers\SocialurlController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ColorSettingController;
@@ -13,24 +18,15 @@ use App\Http\Controllers\ThemeSettingController;
 use App\Http\Controllers\PaypalPaymentController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\GeneralSettingController;
-use App\Http\Controllers\NexmoApiController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::group(['middleware' => 'visitor_log'], function(){
     Route::get('/', function () {
         return redirect('login');
     });
 });
+
+Route::get('file', [FileController::class, 'index'])->name('file');
+Route::post('file', [FileController::class, 'store'])->name('file.store');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('admin.index');
@@ -93,3 +89,12 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
 
     Route::get('/sendMessage', [NexmoApiController::class, 'index']);
 
+    Route::get('/ajax-image', [AjaxImage::class, 'index']);
+    Route::get('/ajax-image-save', [AjaxImage::class, 'save'])->name('ajax.crud');
+
+    // payment
+
+    Route::resource('orders', OrderController::class);
+    Route::post('token', [PaymentController::class, 'token'])->name('token');
+    Route::get('createpayment', [PaymentController::class, 'createpayment'])->name('createpayment');
+    Route::get('executepayment', [PaymentController::class, 'executepayment'])->name('executepayment');
